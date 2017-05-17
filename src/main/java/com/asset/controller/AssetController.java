@@ -1,4 +1,4 @@
-package com.demo.test;
+package com.asset.controller;
 
 import java.util.List;
 import java.util.Map;
@@ -8,11 +8,11 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.demo.test.mapper.UserMapper;
+import com.asset.dao.mapper.UserMapper;
 
 @Controller  //配置controller注解
 @RequestMapping("/testController")  //配置请求
-public class TestController {
+public class AssetController {
 	
 	@Resource
 	private UserMapper userMapper;

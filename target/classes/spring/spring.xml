@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="gb2312"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
@@ -6,52 +6,58 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
         http://www.springframework.org/schema/beans/spring-beans.xsd 
         http://www.springframework.org/schema/tx 
-http://www.springframework.org/schema/tx/spring-tx-3.0.xsd 
-http://www.springframework.org/schema/aop 
-        http://www.springframework.org/schema/aop/spring-aop-3.0.xsd 
+		http://www.springframework.org/schema/tx/spring-tx-2.5.xsd 
+		http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop-2.5.xsd 
         http://www.springframework.org/schema/mvc 
-        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd 
+        http://www.springframework.org/schema/mvc/spring-mvc-2.5.xsd 
         http://www.springframework.org/schema/context 
-        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+        http://www.springframework.org/schema/context/spring-context-2.5.xsd">
         
-<!-- ÅäÖÃÊý¾Ý¿âÁ¬½ÓÐÅÏ¢ -->
+        
+	<bean id="propertyConfigurer" 
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+          <property name="location"><value>classpath:config/jdbc.properties</value></property>
+	</bean> 
+        
+<!-- é…ç½®æ•°æ®åº“è¿žæŽ¥ä¿¡æ¯ -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName">
-			<value>oracle.jdbc.driver.OracleDriver</value>
+			<value>${jdbc.driverClassName}</value>
 		</property>
 		<property name="url">
-			<value>jdbc:oracle:thin:@localhost:1521:XE</value>
+			<value>${jdbc.url}</value>
 		</property>
 		<property name="username">
-			<value>ligaoyu</value>
+			<value>${jdbc.username}</value>
 		</property>
 		<property name="password">
-			<value>ligaoyu</value>
+			<value>${jdbc.password}</value>
 		</property>
 	</bean>
 	
-<!-- ½«Á¬½ÓÐÅÏ¢×¢Èëµ½sqlSessionFactoryÖÐ -->
+<!-- å°†è¿žæŽ¥ä¿¡æ¯æ³¨å…¥åˆ°sqlSessionFactoryä¸­ -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 
-		<!-- ×Ô¶¯É¨ÃèentityÄ¿Â¼, Ê¡µôConfiguration.xmlÀïµÄÊÖ¹¤ÅäÖÃ -->
+		<!-- è‡ªåŠ¨æ‰«æentityç›®å½•, çœæŽ‰Configuration.xmlé‡Œçš„æ‰‹å·¥é…ç½® -->
 		<!-- <property name="mapperLocations" value="classpath:com/xml/*.xml" /> -->
 	</bean>
 	
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<!--·Å½Ó¿ÚµÄ°üÂ·¾¶ -->
-		<property name="basePackage" value="com.demo.test.mapper" />
+		<!--æ”¾æŽ¥å£çš„åŒ…è·¯å¾„ -->
+		<property name="basePackage" value="com.asset.dao.mapper" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 	
-	<!-- ÅäÖÃÊÂÎñ¹ÜÀíÆ÷ -->
+	<!-- é…ç½®äº‹åŠ¡ç®¡ç†å™¨ -->
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
-	<!-- ×¢½â·½Ê½ÅäÖÃÊÂÎï -->
+	<!-- æ³¨è§£æ–¹å¼é…ç½®äº‹ç‰© -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
 </beans> 
