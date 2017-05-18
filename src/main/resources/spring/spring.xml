@@ -39,8 +39,8 @@
 	
 <!-- 将连接信息注入到sqlSessionFactory中 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:mybatis-config.xml" /> <!-- 配置mybatis的配置文件路径 -->
 		<property name="dataSource" ref="dataSource" />
-
 		<!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
 		<!-- <property name="mapperLocations" value="classpath:com/xml/*.xml" /> -->
 	</bean>
