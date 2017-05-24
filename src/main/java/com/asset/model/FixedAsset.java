@@ -1,14 +1,37 @@
 package com.asset.model;
 
+import java.util.Date;
+
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
-public class FixedAsset extends Base {
+public class FixedAsset {
 
+	private int id;
+	
+	private String name;
+	
+	private Date creation;
+	
+	private long lastModified;
+	
+	private boolean removed;
+	
 	private String assetNo;
 	
-	private String location;
+	private Date produceDate;
 	
+	private int level;
+	
+	private int parentId;
+	
+	private float price;
+	
+	private int ownerDept;
+	
+	private String model;
+	
+	private String brand;
+	
+	private String remark;
 }

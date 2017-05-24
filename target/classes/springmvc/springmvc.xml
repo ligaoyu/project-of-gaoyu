@@ -19,6 +19,9 @@
        
     <context:component-scan base-package="com.*" />    
     
+    <!-- 避免spring把资源文件拦截 -->
+    <mvc:default-servlet-handler/>
+    
     <!-- 注解支持 -->
     <mvc:annotation-driven /> 
     
@@ -34,7 +37,8 @@
     <!-- ViewResolver For FreeMarker -->
     <!-- ===================================================== -->
     <bean id="freemarkerResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-        <property name="order" value="1" />
+    	<property name="requestContextAttribute" value="request"/>
+        <property name="order" value="0" />
         <property name="suffix" value=".ftl" />
         <property name="contentType" value="text/html;charset=utf-8" />
         <property name="viewClass">
