@@ -7,27 +7,29 @@
   <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
 </head>
 <body>
-<el-menu theme="dark" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-  <el-menu-item index="1">处理中心</el-menu-item>
-  <el-submenu index="2">
-    <template slot="title">我的工作台</template>
-    <el-menu-item index="2-1">选项1</el-menu-item>
-    <el-menu-item index="2-2">选项2</el-menu-item>
-    <el-menu-item index="2-3">选项3</el-menu-item>
-  </el-submenu>
-  <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
-</el-menu>
-<div class="line"></div>
-<el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-  <el-menu-item index="1">处理中心</el-menu-item>
-  <el-submenu index="2">
-    <template slot="title">我的工作台</template>
-    <el-menu-item index="2-1">选项1</el-menu-item>
-    <el-menu-item index="2-2">选项2</el-menu-item>
-    <el-menu-item index="2-3">选项3</el-menu-item>
-  </el-submenu>
-  <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
-</el-menu>
+<div id="app">
+	<el-menu theme="dark" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+	  <el-menu-item index="1">处理中心</el-menu-item>
+	  <el-submenu index="2">
+	    <template slot="title">我的工作台</template>
+	    <el-menu-item index="2-1">选项1</el-menu-item>
+	    <el-menu-item index="2-2">选项2</el-menu-item>
+	    <el-menu-item index="2-3">选项3</el-menu-item>
+	  </el-submenu>
+	  <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
+	</el-menu>
+	<div class="line"></div>
+	<el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+	  <el-menu-item index="1">处理中心</el-menu-item>
+	  <el-submenu index="2">
+	    <template slot="title">我的工作台</template>
+	    <el-menu-item index="2-1">选项1</el-menu-item>
+	    <el-menu-item index="2-2">选项2</el-menu-item>
+	    <el-menu-item index="2-3">选项3</el-menu-item>
+	  </el-submenu>
+	  <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
+	</el-menu>
+</div>
 
   <!-- 先引入 Vue -->
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
@@ -36,6 +38,7 @@
   
 <script>
 	var app = new Vue({
+		el:"#app",
 		data:{
 			activeIndex: '1',
         	activeIndex2: '1'
