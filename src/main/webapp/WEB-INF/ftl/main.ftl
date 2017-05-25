@@ -29,8 +29,6 @@
   <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
 </el-menu>
 
-</body>
-
   <!-- 先引入 Vue -->
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <!-- 引入组件库 -->
@@ -51,3 +49,5 @@
     }
   }
 </script>
+</body>
+</html>
