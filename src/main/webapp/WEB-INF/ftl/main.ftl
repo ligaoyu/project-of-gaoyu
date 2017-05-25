@@ -5,16 +5,8 @@
   <#assign path="${request.getContextPath()}">
   <!-- 引入样式 -->
   <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
-  <!-- 先引入 Vue -->
-  <script src="https://unpkg.com/vue/dist/vue.js"></script>
-  <!-- 引入组件库 -->
-  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-  <!-- 引入 echarts.js -->
-  <script src="${path}/js/echarts.min.js"></script>
 </head>
 <body>
-
-
 <el-menu theme="dark" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
   <el-menu-item index="1">处理中心</el-menu-item>
   <el-submenu index="2">
@@ -36,8 +28,14 @@
   </el-submenu>
   <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
 </el-menu>
+
 </body>
 
+  <!-- 先引入 Vue -->
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  
 <script>
   export default {
     data() {
