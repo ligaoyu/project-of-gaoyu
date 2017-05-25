@@ -35,7 +35,18 @@
   <script src="https://unpkg.com/element-ui/lib/index.js"></script>
   
 <script>
-  export default {
+	var app = new Vue({
+		data:{
+			activeIndex: '1',
+        	activeIndex2: '1'
+		},
+		methods: {
+	      handleSelect(key, keyPath) {
+	        console.log(key, keyPath);
+	      }
+	    }
+	});
+  /*export default {
     data() {
       return {
         activeIndex: '1',
@@ -47,7 +58,7 @@
         console.log(key, keyPath);
       }
     }
-  }
+  }*/
 </script>
 </body>
 </html>
