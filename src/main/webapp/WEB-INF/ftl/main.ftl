@@ -111,9 +111,6 @@
 		// 基于准备好的dom，初始化echarts实例
         var barChart = echarts.init(document.getElementById('bar_chart'));
 
-        // 指定图表的配置项和数据
-        app.title = '堆叠条形图';
-
 		option = {
     		tooltip : {
         		trigger: 'axis',
