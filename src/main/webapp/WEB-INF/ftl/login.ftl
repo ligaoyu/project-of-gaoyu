@@ -51,6 +51,7 @@
 	<script type="text/JavaScript" src="${path}/js/jquery.min.js"></script>
 	<script type="text/JavaScript" src="${path}/js/tether.min.js"></script>
 	<script type="text/JavaScript" src="${path}/js/bootstrap.min.js"></script>
+	
 
 </body>
 

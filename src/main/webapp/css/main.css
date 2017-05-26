@@ -1,0 +1,66 @@
+.full{
+	height:100% ; 
+	position:absolute;
+}
+
+.fullHeight{
+	height:100% ; 
+	position:absolute;
+}
+
+.topdiv{
+	height:20% ; 
+	position:absolute;
+}
+
+.bg-purple-light {
+    background: #e5e9f2;
+}
+  
+.grid-content {
+    height: 50px;
+}
+
+.img{
+  	position: relative;
+  	left: 30px;
+  	top: 5px;
+	height:40px ; 
+	width:40px ; 
+}
+
+font{
+	position: relative;
+  	left: 40px;
+  	top: -5px;
+	font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+}
+
+.serchInput{
+	top:10%;
+	width:60%;
+	position: relative;
+  	left: 100px;
+}
+
+.exit_button{
+	height:100%;
+	width:100%;
+	background:#e5e9f2;
+	border:0px;
+}
+
+.exit{
+	height:25px ; 
+	width:25px ; 
+}
+.chart{
+	width: 100%;
+	height:400px;
+	position: relative;
+  	top: 20px;
+}
+
+.row_bottom {
+    margin-bottom: 40px;
+}
