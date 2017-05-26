@@ -13,4 +13,14 @@ public class AssetController {
 		return "main";
 	}
 	
+	@RequestMapping(value = "/list/")
+	public String list(String name,ModelMap model){
+		return "asset_list";
+	}
+	
+	@RequestMapping(value = "/add/")
+	public String add(String name,ModelMap model){
+		return "asset_add";
+	}
+	
 }

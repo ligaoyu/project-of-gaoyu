@@ -17,6 +17,10 @@
 .bg-purple-light {
     background: #e5e9f2;
 }
+
+.bg-purple-dark {
+    background: #324157;
+}
   
 .grid-content {
     height: 50px;
@@ -31,6 +35,7 @@
 }
 
 font{
+	color: #bfcbd9;
 	position: relative;
   	left: 40px;
   	top: -5px;
@@ -47,8 +52,9 @@ font{
 .exit_button{
 	height:100%;
 	width:100%;
-	background:#e5e9f2;
+	background:#324157;
 	border:0px;
+	
 }
 
 .exit{
@@ -64,4 +70,13 @@ font{
 
 .row_bottom {
     margin-bottom: 40px;
+}
+
+.box-card {
+	position: relative;
+    top: 50px;
+}
+
+.box-cart-width{
+	width: 100%;
 }

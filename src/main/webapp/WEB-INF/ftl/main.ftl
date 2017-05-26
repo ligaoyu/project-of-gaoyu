@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <#assign path="${request.getContextPath()}">
+  <title>中软睿达</title>
+  <link rel="Shortcut Icon" href="${path}/img/tubiao.png" />
   <!-- 引入样式 -->
   <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
   <link rel="stylesheet" href="${path}/css/main.css">
@@ -14,23 +16,23 @@
 	<!-- 横向标题 -->
 	<el-row>
 		<el-col :span="3">
-			<div class="grid-content bg-purple-light">
+			<div class="grid-content bg-purple-dark">
 				<img src="${path}/img/tubiao.png" class="img" ></img>
 				<font>中软睿达</font>
 			</div>
 		</el-col>
 		<el-col :span="11">
-			<div class="grid-content bg-purple-light serch_padding">
+			<div class="grid-content bg-purple-dark serch_padding">
 				<el-input class="serchInput" placeholder="请输入内容" icon="search"  v-model="input2" :on-icon-click="handleIconClick"></el-input>
 			</div>
 		</el-col>
 		<el-col :span="8">
-			<div class="grid-content bg-purple-light">
+			<div class="grid-content bg-purple-dark">
 			</div>
 		</el-col>
 		<el-col :span="2">
-			<div class="grid-content bg-purple-light">
-				<el-button class="exit_button" type="warning" ><img src="${path}/img/exit.png" class="exit"></img></el-button>
+			<div class="grid-content bg-purple-dark">
+				<el-button class="exit_button" ><img src="${path}/img/exit.png" class="exit"></img></el-button>
 			</div>
 		</el-col>
 	</el-row>
@@ -38,47 +40,42 @@
 	<!-- 纵向菜单 -->
 	<el-row class="tac full">
 		<el-col :span="3" class="fullHeight">
-			<el-menu default-active="2" class="el-menu-vertical-demo full" @open="handleOpen" @close="handleClose" >
-				<el-submenu index="1">
-					<template slot="title">导航一</template>
-					<el-menu-item-group title="分组一">
-						<el-menu-item index="1-1">选项1</el-menu-item>
-						<el-menu-item index="1-2">选项2</el-menu-item>
-					</el-menu-item-group>
-					<el-menu-item-group title="分组2">
-						<el-menu-item index="1-3">选项3</el-menu-item>
-					</el-menu-item-group>
-		        <el-submenu index="1-4">
-					<template slot="title">选项4</template>
-						<el-menu-item index="1-4-1">选项1</el-menu-item>
-					</el-submenu>
+			<el-menu theme="dark" default-active="1" class="el-menu-vertical-demo full" @select="handleSelect" @open="handleOpen" @close="handleClose" >
+				<el-menu-item index="1">DashBoard</el-menu-item>
+				<el-menu-item index="2">设备列表</el-menu-item>
+				<el-submenu index="3">
+					<template slot="title">设备管理</template>
+					<el-menu-item index="3-1">新增设备</el-menu-item>
 				</el-submenu>
-				<el-menu-item index="2">导航二</el-menu-item>
-				<el-menu-item index="3">导航三</el-menu-item>
 			</el-menu>
 		</el-col>
-	</el-row>
-	
-	<!-- 柱形图 -->
-	<el-row class="row_bottom">
+		<!-- 柱形图 -->
 		<el-col :span="19" :offset="4">
 			<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-			<div id="bar_chart" class="chart"></div>
+			<el-card class="box-card row_bottom">
+			  <div id="bar_chart" class="chart"></div>
+			</el-card>
+			
+			<el-row>
+				<el-col :span="11">
+					<el-card class="box-card row_bottom box-cart-width">
+						设备1<el-progress :percentage="0"></el-progress>
+						设备1<el-progress :percentage="20"></el-progress>
+						设备1<el-progress :percentage="40"></el-progress>
+						设备1<el-progress :percentage="70"></el-progress>
+						设备1<el-progress :percentage="90"></el-progress>
+					</el-card>
+				</el-col>
+				<el-col :span="11" :offset="2">
+					<el-card class="box-card row_bottom box-cart-width">
+					  <div id="pie_chart" class="chart"></div>
+					</el-card>
+				</el-col>
+			</el-row>
 		</el-col>
 	</el-row>
 	
-	<el-row :gutter="20" class="row_bottom">
-		<el-col :span="9" :offset="5">
-			设备1<el-progress :percentage="0"></el-progress>
-			设备1<el-progress :percentage="20"></el-progress>
-			设备1<el-progress :percentage="40"></el-progress>
-			设备1<el-progress :percentage="70"></el-progress>
-			设备1<el-progress :percentage="90"></el-progress>
-		</el-col>
-		<el-col :span="9" >
-			<div id="pie_chart" class="chart"></div>
-		</el-col>
-	</el-row>
+	
 	
 </div>
 
@@ -88,6 +85,7 @@
   <script src="https://unpkg.com/element-ui/lib/index.js"></script>
   <!-- 引入 echarts.js -->
   <script src="${path}/js/echarts.min.js"></script>
+  <script src="${path}/js/jquery.min.js"></script>
   
 <script>
 	var app = new Vue({
@@ -96,6 +94,15 @@
 			input2:''
 		},
 		methods: {
+			handleSelect(key, keyPath){
+				if(key === "1"){
+					window.location.href="${path}/asset/main/"; 
+				}else if(key === "2"){
+					window.location.href="${path}/asset/list/"; 
+				}else if(key === "2-1"){
+					window.location.href="${path}/asset/add/"; 
+				}
+			},
 			handleOpen(key, keyPath) {
 				console.log(key, keyPath);
 			},
