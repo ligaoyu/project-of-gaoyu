@@ -5,7 +5,7 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class FixedAsset {
+public class Asset {
 
 	private int id;
 	

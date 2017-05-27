@@ -14,7 +14,7 @@
 <div id="app">
 	
 	<!-- 横向标题 -->
-	<el-row>
+	<el-row class="topdiv">
 		<el-col :span="3">
 			<div class="grid-content bg-purple-dark">
 				<img src="${path}/img/tubiao.png" class="img" ></img>
@@ -80,7 +80,7 @@
 </div>
 
   <!-- 先引入 Vue -->
-  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="${path}/js/vue.js"></script>
   <!-- 引入组件库 -->
   <script src="https://unpkg.com/element-ui/lib/index.js"></script>
   <!-- 引入 echarts.js -->
