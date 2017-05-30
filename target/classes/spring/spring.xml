@@ -59,6 +59,21 @@
 	
 	<!-- 注解方式配置事物 -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" >      
+        <property name="messageConverters">      
+        <list>    
+          <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />    
+          <bean class="org.springframework.http.converter.StringHttpMessageConverter">    
+                <property name="supportedMediaTypes">    
+                    <list>    
+                        <value>text/plain;charset=UTF-8</value>    
+                    </list>    
+                </property>    
+            </bean>    
+        </list>     
+    </property>      
+   </bean>
 
 </beans> 
 

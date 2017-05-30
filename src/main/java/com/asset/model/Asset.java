@@ -1,5 +1,6 @@
 package com.asset.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import lombok.Data;
@@ -34,4 +35,16 @@ public class Asset {
 	private String brand;
 	
 	private String remark;
+	
+	private int type;
+	
+	public String getProduceDate(){
+		if(produceDate == null){
+			return null;
+		}
+		SimpleDateFormat sdf =   new SimpleDateFormat( "yyyy-MM-dd" );
+		String str = sdf.format(produceDate);
+		return str;
+	}
+	
 }

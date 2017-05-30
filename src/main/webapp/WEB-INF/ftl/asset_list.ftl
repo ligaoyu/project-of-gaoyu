@@ -101,15 +101,15 @@
 				  	<el-table-column type="index" width="50"></el-table-column>
 				    <el-table-column prop="assetNo" label="编号"></el-table-column>
 				    <el-table-column prop="name" label="名称"></el-table-column>
-				    <el-table-column prop="produceDate" label="生产日期"></el-table-column>
+				    <el-table-column prop="produceDate" min-width="120" label="生产日期"></el-table-column>
 				    <el-table-column prop="brand" label="品牌"></el-table-column>
 				    <el-table-column prop="model" label="型号"></el-table-column>
 				    <el-table-column prop="price" label="单价"></el-table-column>
 				    <el-table-column prop="ownerDept" label="所在部门"></el-table-column>
-				    <el-table-column label="操作" width="200">
-						<template scope="scope">
-					        <el-button size="mini" type="info" @click="handleEdit(scope.$index, scope.row)">收回</el-button>
-					        <el-button size="mini" type="success" @click="handleDelete(scope.$index, scope.row)">外借</el-button>
+				    <el-table-column label="操作" min-width="120">
+						<template scope="scope" >
+								<el-button v-if="scope.row.type === 1" size="mini" type="info" @click="handleEdit(scope.$index, scope.row)">收回</el-button>
+						        <el-button v-else size="mini" type="success" @click="handleDelete(scope.$index, scope.row)">外借</el-button>
 						</template>
 				    </el-table-column>
 				  </el-table>
@@ -180,8 +180,11 @@
 		             dataType: "json",
 		             success: function(data){
 		             	console.log(data);
-		             	app.tableData=data;
-		             	app.loading=false;
+		             	setTimeout(() => {
+				        	app.tableData=data;
+		             		app.loading=false;
+				        }, 500);
+		             	
 		             }
 				});
 				
