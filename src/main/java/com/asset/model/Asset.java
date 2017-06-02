@@ -22,6 +22,8 @@ public class Asset {
 	
 	private Date produceDate;
 	
+	private String produceDateStr;
+	
 	private int level;
 	
 	private int parentId;
@@ -37,6 +39,8 @@ public class Asset {
 	private String remark;
 	
 	private int type;
+	
+	private String dname;
 	
 	public String getProduceDate(){
 		if(produceDate == null){

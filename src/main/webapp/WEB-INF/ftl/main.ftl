@@ -59,11 +59,14 @@
 			<el-row>
 				<el-col :span="11">
 					<el-card class="box-card row_bottom box-cart-width">
-						设备1<el-progress :percentage="0"></el-progress>
-						设备1<el-progress :percentage="20"></el-progress>
-						设备1<el-progress :percentage="40"></el-progress>
-						设备1<el-progress :percentage="70"></el-progress>
-						设备1<el-progress :percentage="90"></el-progress>
+						<div slot="header" class="clearfix">
+							<span style="line-height: 36px;">各类资产使用率</span>
+						</div>
+						<template v-for="item in progress">
+							<span>{{item.name}}</span><el-progress :text-inside="true" :stroke-width="18" :percentage="item.percent*100"></el-progress>
+						</template>
+						
+						
 					</el-card>
 				</el-col>
 				<el-col :span="11" :offset="2">
@@ -91,7 +94,8 @@
 	var app = new Vue({
 		el:"#app",
 		data:{
-			input2:''
+			input2:'',
+			progress:${progress }
 		},
 		methods: {
 			handleSelect(key, keyPath){
@@ -99,7 +103,7 @@
 					window.location.href="${path}/asset/main/"; 
 				}else if(key === "2"){
 					window.location.href="${path}/asset/list/"; 
-				}else if(key === "2-1"){
+				}else if(key === "3-1"){
 					window.location.href="${path}/asset/add/"; 
 				}
 			},
@@ -110,7 +114,8 @@
 				console.log(key, keyPath);
 			},
 			handleIconClick(ev) {
-      			console.log(ev);
+				console.log(11111);
+      			window.location.href="${path}/asset/find/?value="+this.input2; 
     		}
 	    }
 	});
@@ -122,129 +127,56 @@
     		tooltip : {
         		trigger: 'axis',
         		axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-            	type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-        	}
-    	},
-    	legend: {
-        	data: ['直接访问', '邮件营销','联盟广告','视频广告','搜索引擎']
-   	 	},
-    	grid: {
-	        left: '3%',
-	        right: '4%',
-	        bottom: '3%',
-	        containLabel: true
-	    },
-	    xAxis:  {
-	        type: 'category',
-	        data: ['周一','周二','周三','周四','周五','周六','周日']
-	    },
-	    yAxis: {
-	        type: 'value'
-	    },
-	    series: [
-	        {
-	            name: '直接访问',
-	            type: 'bar',
-	            stack: '总量',
-	            label: {
-	                normal: {
-	                    show: true,
-	                    position: 'insideRight'
-	                }
-	            },
-	            data: [320, 302, 301, 334, 390, 330, 320]
-	        },
-	        {
-	            name: '邮件营销',
-	            type: 'bar',
-	            stack: '总量',
-	            label: {
-	                normal: {
-	                    show: true,
-	                    position: 'insideRight'
-	                }
-	            },
-	            data: [120, 132, 101, 134, 90, 230, 210]
-	        },
-	        {
-	            name: '联盟广告',
-	            type: 'bar',
-	            stack: '总量',
-	            label: {
-	                normal: {
-	                    show: true,
-	                    position: 'insideRight'
-	                }
-	            },
-	            data: [220, 182, 191, 234, 290, 330, 310]
-	        },
-	        {
-	            name: '视频广告',
-	            type: 'bar',
-	            stack: '总量',
-	            label: {
-	                normal: {
-	                    show: true,
-	                    position: 'insideRight'
-	                }
-	            },
-	            data: [150, 212, 201, 154, 190, 330, 410]
-	        },
-	        {
-	            name: '搜索引擎',
-	            type: 'bar',
-	            stack: '总量',
-	            label: {
-	                normal: {
-	                    show: true,
-	                    position: 'insideRight'
-	                }
-	            },
-	            data: [820, 832, 901, 934, 1290, 1330, 1320]
-	        }
-    	]
-	};
+	            	type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+	        	}
+	    	},
+	    	legend: {
+	        	data: ${legend }
+	   	 	},
+	    	grid: {
+		        left: '3%',
+		        right: '4%',
+		        bottom: '3%',
+		        containLabel: true
+		    },
+		    xAxis:  {
+		        type: 'category',
+		        data: ${xAxis }
+		    },
+		    yAxis: {
+		        type: 'value'
+		    },
+		    series: ${series }
+		};
+		
 	// 使用刚指定的配置项和数据显示图表。
 	barChart.setOption(option);
 
 	// 基于准备好的dom，初始化echarts实例
     var pieChart = echarts.init(document.getElementById('pie_chart'));
 	
+	console.log(${arr });
+	
 	pieOption = {
     title : {
-        text: '某站点用户访问来源',
-        subtext: '纯属虚构',
+        text: '固定资产类别占比',
         x:'center'
     },
     tooltip : {
         trigger: 'item',
-        formatter: "{a} <br/>{b} : {c} ({d}%)"
+        formatter: "{b} : {c} ({d}%)"
     },
     legend: {
         orient: 'vertical',
         left: 'left',
-        data: ['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+        data: ${arr }
     },
     series : [
         {
-            name: '访问来源',
             type: 'pie',
             radius : '55%',
             center: ['50%', '60%'],
-            data:[
-                {value:335, name:'直接访问'},
-                {value:310, name:'邮件营销'},
-                {value:234, name:'联盟广告'},
-                {value:135, name:'视频广告'},
-                {value:1548, name:'搜索引擎'}
-            ],
-            itemStyle: {
-                emphasis: {
-                    shadowBlur: 10,
-                    shadowOffsetX: 0,
-                    shadowColor: 'rgba(0, 0, 0, 0.5)'
-                }
-            }
+            data:${pieData }
         }
     ]
 	};

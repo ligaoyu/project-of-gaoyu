@@ -27,7 +27,10 @@ public class SqlProvider {
 			sb.append(" and type = '" + vo.getType() +"' ");
 		}
 		
-		return " select * from asset where removed = 0 and level=2 " + sb.toString() ;
+		return " select c.*,d.dname from asset c left join "
+			+ "(select a.asset_id,(select name from fixed_asset.usr_dept where id=a.dept_id) as dname from fixed_asset.asset_dept a join "
+			+ "(SELECT asset_id,max(creation) as last_time FROM fixed_asset.asset_dept group by asset_id) b "
+			+ "on a.asset_id=b.asset_id where creation=last_time and type=0) d on c.id=d.asset_id where removed = 0 and level=2 " + sb.toString() ;
 	}
 	
 }

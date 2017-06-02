@@ -98,18 +98,18 @@
 			<el-card class="box-card row_bottom">
 				<template>
 				  <el-table :data="tableData" stripe style="width: 100%" v-loading.body="loading">
-				  	<el-table-column type="index" width="50"></el-table-column>
+				  	<el-table-column type="index" width="100"></el-table-column>
 				    <el-table-column prop="assetNo" label="编号"></el-table-column>
 				    <el-table-column prop="name" label="名称"></el-table-column>
 				    <el-table-column prop="produceDate" min-width="120" label="生产日期"></el-table-column>
 				    <el-table-column prop="brand" label="品牌"></el-table-column>
 				    <el-table-column prop="model" label="型号"></el-table-column>
 				    <el-table-column prop="price" label="单价"></el-table-column>
-				    <el-table-column prop="ownerDept" label="所在部门"></el-table-column>
+				    <el-table-column prop="dname" label="所在部门"></el-table-column>
 				    <el-table-column label="操作" min-width="120">
 						<template scope="scope" >
-								<el-button v-if="scope.row.type === 1" size="mini" type="info" @click="handleEdit(scope.$index, scope.row)">收回</el-button>
-						        <el-button v-else size="mini" type="success" @click="handleDelete(scope.$index, scope.row)">外借</el-button>
+								<el-button v-if="scope.row.type === 1" size="mini" type="info" @click="getBack(scope.$index, scope.row.id)">收回</el-button>
+						        <el-button v-else size="mini" type="success" @click="lend(scope.$index, scope.row.id)">外借</el-button>
 						</template>
 				    </el-table-column>
 				  </el-table>
@@ -118,6 +118,31 @@
 		</el-col>
 	</el-row>
 	
+	<el-dialog title="选择" :visible.sync="dialogFormVisible" v-loading.body="dialogLoading">
+	  <el-form :model="dialogForm" label-width="100px">
+	    <el-form-item label="负责人" >
+	      <el-input v-model="dialogForm.userName" ></el-input>
+	    </el-form-item>
+	    <el-form-item label="接收部门">
+	      <el-select v-model="dialogForm.deptId" placeholder="请选择部门">
+	        <el-option	v-for="item in dept"
+			      :key="item.id"
+			      :label="item.name"
+			      :value="item.id"></el-option>
+	      </el-select>
+	    </el-form-item>
+	    <el-form-item label="存放地点" >
+	      <el-input v-model="dialogForm.location" ></el-input>
+	    </el-form-item>
+	    <el-form-item label="备注">
+		    <el-input  type="textarea" v-model="dialogForm.remark" ></el-input>
+		</el-form-item>
+	  </el-form>
+	  <div slot="footer" class="dialog-footer">
+	    <el-button @click="dialogFormVisible = false">取 消</el-button>
+	    <el-button type="primary" @click="confirm">确 定</el-button>
+	  </div>
+	</el-dialog>
 	
 	
 </div>
@@ -139,11 +164,21 @@
 			loading:false,
 			tableData:${assetJson },
 			parentId:${assetParent },
+			dept:${deptList },
+			dialogFormVisible:false,
+			dialogLoading:false,
 			form: {
 	          assetNo: '',
 	          name: '',
 	          parent: '',
 	          type: ''
+	        },
+	        dialogForm: {
+	        	assetId:'',
+	          	userName: '',
+	          	deptId: '',
+	          	location:'',
+	          	remark:''
 	        }
 		},
 		methods: {
@@ -152,7 +187,7 @@
 					window.location.href="${path}/asset/main/"; 
 				}else if(key === "2"){
 					window.location.href="${path}/asset/list/"; 
-				}else if(key === "2-1"){
+				}else if(key === "3-1"){
 					window.location.href="${path}/asset/add/"; 
 				}
 			},
@@ -163,13 +198,69 @@
 				console.log(key, keyPath);
 			},
 			handleIconClick(ev) {
-      			console.log(ev);
+      			window.location.href="${path}/asset/find/?value="+this.input2; 
     		},
-    		handleEdit(index, row) {
-				console.log(index, row);
+    		getBack(index, id) {
+				this.$confirm('确认归还?', '提示', {
+		          confirmButtonText: '确定',
+		          cancelButtonText: '取消',
+		          type: 'info'
+		        }).then(() => {
+		        	$.ajax({
+			             type: "POST",
+			             url: "${path}/asset/getBack/",
+			             data: {"id":id},
+			             dataType: "json",
+			             success: function(data){
+			             	app.$message({
+						  		type: 'success',
+						        message: '归还成功!'
+						    });
+						    app.onSubmit();
+			             }
+					});
+		        
+		        }).catch(() => {
+		          this.$message({
+		            type: 'info',
+		            message: '已取消'
+		          });          
+		        });
 			},
-			handleDelete(index, row) {
-				console.log(index, row);
+			lend(index, id) {
+				this.dialogFormVisible=true;
+				this.dialogForm.assetId = id;
+			},
+			confirm(){
+				this.dialogLoading = true;
+				$.ajax({
+		             type: "POST",
+		             url: "${path}/asset/lend/",
+		             data: app.dialogForm,
+		             dataType: "json",
+		             success: function(data){
+		             	setTimeout(() => {
+		             		app.dialogLoading=false;
+		             		dialogFormVisible = false;
+		             		if(data == 1){
+								app.$notify({
+						          title: '成功',
+						          message: '创建成功',
+						          type: 'success'
+						        });
+							}else{
+								app.$notify({
+						          title: '失败',
+						          message: '创建失败',
+						          type: 'warning'
+						        });
+							}
+				        }, 500);
+		             	
+		             }
+				});
+				this.dialogFormVisible = false;
+				this.onSubmit();
 			},
 			onSubmit() {
 				this.loading=true;
@@ -179,7 +270,6 @@
 		             data: $('#form').serialize(),
 		             dataType: "json",
 		             success: function(data){
-		             	console.log(data);
 		             	setTimeout(() => {
 				        	app.tableData=data;
 		             		app.loading=false;
